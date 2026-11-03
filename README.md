@@ -14,6 +14,7 @@ This repository contains Python and R scripts for the full redistricting workflo
 |--------|-------------|
 | [`redistricting/compactness_scores.py`](redistricting/compactness_scores.py) | Computes four compactness metrics — Polsby-Popper, Reock, Convex Hull, and Schwartzberg — used in redistricting litigation. Outputs a ranked CSV with a composite score and flags multi-part (non-contiguous) districts. |
 | [`redistricting/contiguity_checker.py`](redistricting/contiguity_checker.py) | Verifies that every district in a plan is geographically contiguous, a constitutional requirement in most states. Detects MultiPolygon breaks, point-only touches, and near-miss gaps from digitizing errors. Exits with code 1 if failures found (CI-pipeline compatible). |
+| [`redistricting/plan_population_report.py`](redistricting/plan_population_report.py) | Aggregates a district-population CSV, calculates ideal population and deviation, and flags districts outside a configurable threshold before stakeholder review. |
 
 ---
 
@@ -55,6 +56,20 @@ This repository contains Python and R scripts for the full redistricting workflo
 
 **Projections** — EPSG:4326 (WGS84), EPSG:5070 (Conus Albers Equal Area)
 
+## Quick start
+
+Install the Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run a population-equality check from a tabular district export:
+
+```bash
+python redistricting/plan_population_report.py districts.csv --district-column district_id --population-column total_population --output population_report.csv
+```
+
 ---
 
 ## Related Repository
@@ -67,3 +82,4 @@ For voter file processing, SQL analytics, and newsletter analysis, see [Projects
 
 - **LinkedIn:** [linkedin.com/in/quentin-sprauve-5b819893](https://www.linkedin.com/in/quentin-sprauve-5b819893/)
 - **Email:** sprauveq@gmail.com
+
